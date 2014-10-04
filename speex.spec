@@ -1,9 +1,11 @@
+# based on PLD Linux spec git://git.pld-linux.org/packages/.git
+
 %define		_rc	rc1
 
 Summary:	An open-source, patent-free speech codec
 Name:		speex
 Version:	1.2
-Release:	%{_rc}.12
+Release:	%{_rc}.13
 Epoch:		1
 License:	BSD
 Group:		Libraries
@@ -27,6 +29,7 @@ to the Vorbis codec.
 Summary:	Speex library - development files
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libogg-devel
 
 %description devel
 Speex library - development files.
@@ -61,6 +64,8 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	docdir=%{_docdir}/%{name}
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -79,8 +84,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libspeex.so
 %attr(755,root,root) %{_libdir}/libspeexdsp.so
-%{_libdir}/libspeex.la
-%{_libdir}/libspeexdsp.la
 %{_includedir}/speex
 %{_aclocaldir}/speex.m4
 %{_pkgconfigdir}/speex.pc
